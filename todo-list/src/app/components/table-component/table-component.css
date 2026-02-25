@@ -1,0 +1,145 @@
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent;
+}
+
+thead tr {
+  background: linear-gradient(135deg, #2c3e50, #1e2b37);
+  border-radius: 15px;
+}
+
+th {
+  padding: 15px 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  text-align: left;
+  background: rgba(44, 62, 80, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+th:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+th:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+tbody tr {
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 156, 124, 0.15);
+  background: linear-gradient(to right, #ffffff, #f8fff9);
+}
+
+td {
+  padding: 15px 20px;
+  color: #2c3e50;
+  font-size: 14px;
+  border-bottom: 1px solid #ecf0f1;
+  background: white;
+}
+
+td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  font-weight: 600;
+  color: #2e7d5a;
+}
+
+/* استایل برای سلول آخر (حاوی آیکون‌ها) */
+td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  display: flex;
+  justify-content:space-between;  /* این باعث چسبیدن آیکون‌ها به راست می‌شه */
+  align-items: center;
+  gap: 15px;
+  padding-right: 25px;  /* فاصله از لبه راست */
+}
+
+/* استایل برای آیکون‌ها */
+td:last-child svg {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;  /* جلوگیری از جمع شدن آیکون‌ها */
+}
+
+td:last-child svg:hover {
+  transform: scale(1.2);
+}
+
+td:last-child svg.bi-trash:hover {
+  color: #ff3b3b !important;
+  filter: drop-shadow(0 3px 5px rgba(255, 59, 59, 0.3));
+}
+
+td:last-child svg.bi-pencil-square:hover {
+  color: #4a4aff !important;
+  filter: drop-shadow(0 3px 5px rgba(74, 74, 255, 0.3));
+}
+
+/* استایل برای محتوای سلول‌ها */
+td:nth-child(2) {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+td:nth-child(3) {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #7f8c8d;
+  min-width: 180px;
+}
+
+/* پیام وقتی تسکی وجود ندارد */
+.no-tasks-message {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+  color: #95a5a6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin: 30px auto;
+}
+.completed-row {
+  position: relative;
+  opacity: 0.6;
+}
+
+.completed-row::after {
+  opacity: 0.7;
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 0;
+  top: 45%;
+  height: 2px;
+  background: #999;
+  transform: scaleX(1);
+  transition: 0.3s ease;
+}

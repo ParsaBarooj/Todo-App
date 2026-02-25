@@ -1,0 +1,6 @@
+<form [formGroup]="myForm">
+  <label>Task:</label>
+  <input type="text" formControlName="task" (keyup.enter)="(state=='edit' && myForm.valid) ? putValue() : onAdd()">
+  <button type="button" (click)="state=='edit' ? putValue() : onAdd()" [disabled]="myForm.invalid && !myForm.touched"
+    [class]="state=='edit' ? 'edit-button' : 'add-button'">{{ this.stateButtonText }}</button>
+</form>
