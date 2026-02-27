@@ -2,10 +2,12 @@ import { Component, inject, OnChanges, OnInit, Output, output, SimpleChanges } f
 import { Task, TaskService } from '../../services/task-service';
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from 'stream';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-table-component',
-  imports: [CommonModule],
+  imports: [CommonModule, DragDropModule],
   templateUrl: './table-component.html',
   styleUrl: './table-component.css',
 })
@@ -23,12 +25,10 @@ export class TableComponent implements OnInit {
   private taskService = inject(TaskService);
   ngOnInit(): void {
     this.taskService.tasks$.subscribe(t => {
-      console.log('new tasks arived to grid');
       this.tasks = t;
     });
   }
   onEdit(id: number) {
-    console.log('id:', id);
     //this.taskService.onEdit(id);
     this.taskService.setSelectedTask(id);
 
@@ -43,5 +43,8 @@ export class TableComponent implements OnInit {
     else{
       return false;
     } 
+  }
+  drop(event: any) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 }

@@ -18,15 +18,14 @@ export class FormComponent implements AfterViewInit, OnInit {
   stateButtonText: string = "Add";
   ngOnInit() {
     this.taskService.tasks$.subscribe(t => {
-      console.log('new tasks recieved to form');
       this.tasks = t;
     });
+    this.myForm.markAsTouched();
   }
   editingTaskId: number = -1;
   ngAfterViewInit() {
     this.taskService.selectedTask$.subscribe(id => {
       if (id) {
-        console.log('iiiii', id, this.tasks);
         this.myForm.controls['task'].setValue(this.tasks.find(t => t.id === id)?.content);
         this.state = 'edit';
         this.stateButtonText = "Edit";
@@ -53,14 +52,13 @@ export class FormComponent implements AfterViewInit, OnInit {
 
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      id: new FormControl('', []),
-      task: new FormControl('', Validators.required)
+      id: new FormControl(-1, []),
+      task: new FormControl("", Validators.required)
     });
   }
 
   onAdd() {
     // if(!this.myForm.controls['id'].value){
-    console.log('adding');
 
     this.myForm.controls['id'].setValue(this.generate4DigitUnique());
     const task = {
@@ -100,7 +98,8 @@ export class FormComponent implements AfterViewInit, OnInit {
     this.state = "add";
     this.stateButtonText = "Add";
   }
-  handleAction(){
-    console.log('donnnnnee');
+  enterPressed(){
+    if(this.myForm.invalid || !this.myForm.touched) return
+    this.state=="edit" ? this.putValue() : this.onAdd();
   }
 }

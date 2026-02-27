@@ -29,8 +29,12 @@ export class TaskService implements OnInit {
 
   }
   putTask(task: Task) {
-    this.tasks = this.tasks.filter(t => t.id !== task.id);
-    this.tasks.push(task);
+    this.tasks.forEach(el => {
+      if(el.id === task.id){
+        el.content = task.content;
+        el.createdOn = task.createdOn;
+      }
+    });
     this.tasksSubject.next(this.tasks)
     this.selectedTaskSubject.next(null);
   }

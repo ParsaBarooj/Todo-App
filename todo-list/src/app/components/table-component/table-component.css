@@ -143,3 +143,19 @@ td:nth-child(3) {
   transform: scaleX(1);
   transition: 0.3s ease;
 }
+/* ظاهر آیتم هنگام کشیدن */
+.cdk-drag-preview {
+  visibility: hidden;
+}
+
+/* جای خالی آیتم هنگام جابجایی */
+.cdk-drag-placeholder {
+}
+
+/* انیمیشن نرم هنگام reorder */
+.cdk-drag-animating {
+  transition: none !important;
+}
+.cdk-drop-list-dragging .cdk-drag {
+  transition: 0.1s ease;
+}

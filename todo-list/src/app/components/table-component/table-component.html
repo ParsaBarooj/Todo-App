@@ -8,15 +8,17 @@
             <th>Created On</th>
         </tr>
     </thead>
-    <tbody>
-        @for (task of undoneTasks;track $index) {
-        <tr>
+    <tbody cdkDropList [cdkDropListData]="undoneTasks" (cdkDropListDropped)="drop($event)" class="example-list">
+        @for (task of undoneTasks;track task.id) {
+        <tr cdkDrag class="example-box">
             <td>
                 <input type="checkbox" [checked]="isSelected(task.id)" style="display:none">
                 <i [class]="
            isSelected(task.id) ? 'fas fa-check-square' : 
            'far fa-square'" (click)="toggleViaIcon(task.id)" style="cursor:pointer; font-size:24px;transition: 0.1s;">
                 </i>
+                <i class="fa fa-bars" style="margin-left: 15px;font-size: 22px;cursor: all-scroll;color: gray;opacity: 0.6;"
+                    cdkDragHandle></i>
             </td>
             <td>{{ task.content }}</td>
             <td>{{ task.createdOn }}
@@ -41,12 +43,16 @@
             </td>
         </tr>
         }
-        @if (doneTasks.length>0) {
-            <br>
-            <hr style="width: 610%;">
-            <br>
-        }
-        @for (task of doneTasks;track $index) {
+    </tbody>
+</table>
+@if (doneTasks.length>0) {
+<br>
+<hr style="width: 610%;">
+<br>
+}
+<table>
+    <tbody>
+        @for (task of doneTasks;track task.id) {
         <tr class="completed-row">
             <td>
                 <input type="checkbox" [checked]="isSelected(task.id)" style="display:none">
@@ -54,6 +60,8 @@
            isSelected(task.id) ? 'fas fa-check-square' : 
            'far fa-square'" (click)="toggleViaIcon(task.id)" style="cursor:pointer; font-size:24px;transition: 0.1s;">
                 </i>
+                <i class="fa fa-bars" style="margin-left: 15px;font-size: 22px;cursor: all-scroll;color: gray;opacity: 0.6;"></i>
+
             </td>
             <td>{{ task.content }}</td>
             <td>{{ task.createdOn }}
